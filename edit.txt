@@ -15,10 +15,9 @@
 }
 
 body {
-    background-image: linear-gradient( rgba(241, 234, 234, 0.4), rgba(128, 104, 104, 0.4)), url(aa.jpg);
-    background-size: 100%;
-    /*background-position: center;
-    */
+    background-image: linear-gradient( rgba(62, 20, 20, 0.4), rgba(62, 20, 20, 0.4)), url(back.jpg);
+    background-size: cover;
+    background-position: center;
     font-family: Lato;
     font-weight: 300;
     position: relative;
@@ -26,13 +25,14 @@ body {
     color: #555;
 }
 
+
 .wrapper {
     width: 1000px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* background-color: rgb(107, 209, 201); */
+    background-color: #fff;
     box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
@@ -46,19 +46,17 @@ body {
 }
 
 
+
 /**********************************************
 *** ТОГЛОГЧИД
 **********************************************/
 
 .player-name {
-    background-color: rgba(219, 241, 18, 0.541);
-    border-radius: 15px;
-    font-size: 45px;
+    font-size: 40px;
     text-align: center;
-    text-transform: capitalize;
+    text-transform: uppercase;
     letter-spacing: 2px;
-    /*font-weight: 100;
-    */
+    font-weight: 100;
     margin-top: 20px;
     margin-bottom: 10px;
     position: relative;
@@ -68,35 +66,25 @@ body {
     text-align: center;
     font-size: 80px;
     font-weight: 100;
-    width: 30%;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin: auto;
-    color: #eb4d4d;
+    color: #EB4D4D;
     margin-bottom: 130px;
 }
 
-.active {
-    background-color: rgba(182, 172, 172, 0.548);
-    border-radius: 50px;
-    background-size: 50px;
-}
-
-.active .player-name {
-    font-family: cursive;
-    font-weight: 300;
-}
+.active { background-color: #f7f7f7; }
+.active .player-name { font-weight: 300; }
 
 .active .player-name::after {
     content: "\2022";
     font-size: 47px;
     position: absolute;
-    color: #eb4d4d;
+    color: #EB4D4D;
     top: -7px;
     right: 10px;
+    
 }
 
 .player-current-box {
-    background-color: #eb4d4d;
+    background-color: #EB4D4D;
     color: #fff;
     width: 40%;
     margin: 0 auto;
@@ -107,12 +95,12 @@ body {
 .player-current-label {
     text-transform: uppercase;
     margin-bottom: 10px;
+    font-size: 12px;
     color: #222;
 }
 
 .player-current-score {
     font-size: 30px;
-    color: greenyellow;
 }
 
 button {
@@ -120,7 +108,7 @@ button {
     width: 200px;
     left: 50%;
     transform: translateX(-50%);
-    color: rgb(0, 253, 13);
+    color: #555;
     background: none;
     border: none;
     font-family: Lato;
@@ -131,20 +119,15 @@ button {
     transition: background-color 0.3s, color 0.3s;
 }
 
-button:hover {
-    font-weight: 600;
-}
-
-button:hover i {
-    margin-right: 20px;
-}
+button:hover { font-weight: 600; }
+button:hover i { margin-right: 20px; }
 
 button:focus {
     outline: none;
 }
 
 i {
-    color: #eeff00;
+    color: #EB4D4D;
     display: inline-block;
     margin-right: 15px;
     font-size: 32px;
@@ -154,33 +137,18 @@ i {
     transition: margin 0.3s;
 }
 
-.btn-new {
-    top: 45px;
-}
-
-.btn-roll {
-    top: 403px;
-}
-
-.btn-hold {
-    top: 467px;
-}
+.btn-new { top: 45px;}
+.btn-roll { top: 403px;}
+.btn-hold { top: 467px;}
 
 .dice {
-    /* display: none; */
     position: absolute;
     left: 50%;
     top: 178px;
     transform: translateX(-50%);
     height: 100px;
-    box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
 }
 
-.winner {
-    background-color: #f7f7f7;
-}
-
-.winner .player-name {
-    font-weight: 300;
-    color: #eb4d4d;
-}
+.winner { background-color: #f7f7f7; }
+.winner .player-name { font-weight: 300; color: #EB4D4D; }
