@@ -1,31 +1,61 @@
-// toglogchiin eeljiig hadgalah huwisagch, 1-r toglogchiig 0, 2-r toglogchiig 1 gej temdeglie
-var activePlayer = 0;
+// Тоглоомын бүх газарт ашиглагдах глобаль хувьсагчдыг энд зарлая
 
-// toglogchdiin tsugluulsan onoog hadgalah huwisagch
-var scores = [0, 0];
+// аль тоглогч шоо шидэх вэ гэдгийг энд хадгална
+var activePlayer;
 
-// toglogchiin eeljindee tsugluulj baigaa onoog hadgalah huwisagch
-var roundScore = 0;
+// 2 тоглогчийн цуглуулсан оноонууд
+var scores;
 
-// shooni ali talaaraa buusnig hadgalah huwisagch heregtei, 1-6 gesen utgig ene huwisagchid sanamsarguigeer uusgej ogno.
-// var dice = Math.floor(Math.random() * 6) + 1;
+// идэвхитэй тоглогчийн цуглуулж байгаа ээлжийн оноо
+var roundScore;
 
-// <div class="player-score" id="score-0">43</div>
-// document.querySelector("#score-0").textContent = dice;
-// document.querySelector("#score-1").innerHTML = "<em>YES!</em>";
-
-// programm ehlehed beltgie
-
-document.getElementById("score-0").textContent = "0";
-document.getElementById("score-1").textContent = "0";
-
-document.getElementById("current-0").textContent = 0;
-document.getElementById("current-1").textContent = 0;
-
+// шооны зургийг үзүүлэх эвентийг DOM-оос хайж олоод энд хадгалъя
 var diceDom = document.querySelector(".dice");
-diceDom.style.display = "none";
 
-// shoog shideh event listener
+// тоглоомыг эхлүүлэх дэлгэц цэвэрлэх
+initGame();
+
+function initGame() {
+    // toglogchiin eeljiig hadgalah huwisagch, 1-r toglogchiig 0, 2-r toglogchiig 1 gej temdeglie
+    activePlayer = 0;
+
+    // toglogchdiin tsugluulsan onoog hadgalah huwisagch
+    scores = [0, 0];
+
+    // toglogchiin eeljindee tsugluulj baigaa onoog hadgalah huwisagch
+    roundScore = 0;
+
+    document.querySelector(".player-0-panel").classList.remove("winner");
+    document.querySelector(".player-1-panel").classList.remove("winner");
+
+    // тоглогчдын нэрийг буцааж гаргах
+    document.getElementById("name-0").textContent = "Player 1";
+    document.getElementById("name-1").textContent = "Player 2";
+
+    document.querySelector(".player-0-panel").classList.remove("active");
+    document.querySelector(".player-1-panel").classList.remove("active");
+
+    document.querySelector(".player-0-panel").classList.add("active");
+
+    // shooni ali talaaraa buusnig hadgalah huwisagch heregtei, 1-6 gesen utgig ene huwisagchid sanamsarguigeer uusgej ogno.
+    // var dice = Math.floor(Math.random() * 6) + 1;
+
+    // <div class="player-score" id="score-0">43</div>
+    // document.querySelector("#score-0").textContent = dice;
+    // document.querySelector("#score-1").innerHTML = "<em>YES!</em>";
+
+    // programm ehlehed beltgie
+
+    document.getElementById("score-0").textContent = "0";
+    document.getElementById("score-1").textContent = "0";
+
+    document.getElementById("current-0").textContent = 0;
+    document.getElementById("current-1").textContent = 0;
+
+    diceDom.style.display = "none";
+}
+
+// шоог шидэх эвент листенер
 document.querySelector(".btn-roll").addEventListener("click", function() {
     // 1-6 доторх санамсаргүй нэг тоо гаргаж авна
     var diceNumber = Math.floor(Math.random() * 6) + 1;
@@ -42,25 +72,49 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
         roundScore = roundScore + diceNumber;
         document.getElementById("current-" + activePlayer).textContent = roundScore;
     } else {
-        // 1 буусан тул тоглогчийн ээлжийг энэ хэсэгт сольж өгнө
-
-        // энэ тоглогчийн ээлжиндээ цуглуулсан оноог 0 болгоно
-        roundScore = 0;
-        document.getElementById("current-" + activePlayer).textContent = 0;
-
-        // Тоглогчийн ээлжийг нөгөө тоглогч руу шилжүүлнэ
-        // хэрэв идэвхитэй тоглогч нь 0 байвал идэвхитэй тоглогчийг 1 болго
-        // Үгүй бол идэвхитэй тоглогчийг 0 болго
-
-        activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-        // if (activePlayer === 0) {
-        //     activePlayer = 1;
-        // } else {
-        //     activePlayer = 0;
-        // }
-
-        // Улаан цэгийг шилжүүлэх
-        document.querySelector(".player-0-panel").classList.toggle("active");
-        document.querySelector(".player-1-panel").classList.toggle("active");
+        nextPlayer();
     }
+});
+// HOLD  товчны эвент листенер
+document.querySelector(".btn-hold").addEventListener("click", function() {
+    // Уг тоглогчийн цуглуулсан ээлжний оноог глобаль оноон дээр нь нэмж өгнө
+    scores[activePlayer] = scores[activePlayer] + roundScore;
+
+    // Дэллгэц дээр оноог нь өөрчилнө
+    document.getElementById("score-" + activePlayer).textContent =
+        scores[activePlayer];
+
+    diceDom.style.display = "none";
+
+    // уг тоглогч хожсон эсэхийг (оноо нь 100-с их эсэх) шалгах
+    if (scores[activePlayer] >= 100) {
+        // ялагч гэсэн текстийг нэрнийх нь оронд гаргана
+        document.getElementById("name-" + activePlayer).textContent = "WINNER!!!";
+        document
+            .querySelector(".player-" + activePlayer + "-panel")
+            .classList.add("winner");
+        document
+            .querySelector(".player-" + activePlayer + "-panel")
+            .classList.remove("active");
+    } else {
+        nextPlayer();
+    }
+});
+
+// энэ функц нь тоглох ээлжийг дараачийн тоглогч руу шилжүүлнэ
+function nextPlayer() {
+    // ээлжийн оноог нь 0 болгоно
+    roundScore = 0;
+    document.getElementById("current-" + activePlayer).textContent = 0;
+
+    // тоглогчийн ээлжийг солино
+    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+
+    document.querySelector(".player-0-panel").classList.toggle("active");
+    document.querySelector(".player-1-panel").classList.toggle("active");
+}
+
+//  шинэ тоглоом эхлүүлэх товчний эвент листенер
+document.querySelector(".btn-new").addEventListener("click", function() {
+    initGame();
 });

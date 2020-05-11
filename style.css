@@ -177,10 +177,12 @@ i {
 }
 
 .winner {
-    background-color: #f7f7f7;
+    background-color: #fffb01ce;
+    border-radius: 50px;
+    background-size: 50px;
 }
 
 .winner .player-name {
     font-weight: 300;
-    color: #eb4d4d;
+    color: #0019fa;
 }
