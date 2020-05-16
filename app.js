@@ -12,7 +12,8 @@ var scores;
 var roundScore;
 
 // шооны зургийг үзүүлэх эвентийг DOM-оос хайж олоод энд хадгалъя
-var diceDom = document.querySelector(".dice");
+var diceDom0 = document.querySelector(".dice0");
+var diceDom1 = document.querySelector(".dice1");
 
 // тоглоомыг эхлүүлэх дэлгэц цэвэрлэх
 initGame();
@@ -57,25 +58,29 @@ function initGame() {
     document.getElementById("current-0").textContent = 0;
     document.getElementById("current-1").textContent = 0;
 
-    diceDom.style.display = "none";
+    diceDom0.style.display = "none";
+    diceDom1.style.display = "none";
 }
 
 // шоог шидэх эвент листенер
 document.querySelector(".btn-roll").addEventListener("click", function() {
     if (isNewGame) {
         // 1-6 доторх санамсаргүй нэг тоо гаргаж авна
-        var diceNumber = Math.floor(Math.random() * 6) + 1;
+        var diceNumber0 = Math.floor(Math.random() * 6) + 1;
+        var diceNumber1 = Math.floor(Math.random() * 6) + 1;
 
         // шооны зургийг веб дээр гаргаж ирнэ
-        diceDom.style.display = "block";
+        diceDom0.style.display = "block";
+        diceDom1.style.display = "block";
 
         // буусан санамсаргүй тоонд харгалзах шооны зургийг веб дээр гаргаж ирнэ
-        diceDom.src = "dice-" + diceNumber + ".png";
+        diceDom0.src = "dice-" + diceNumber0 + ".png";
+        diceDom1.src = "dice-" + diceNumber1 + ".png";
 
         // буусан тоо нь нэгээс ялгаатай бол идэвхитэй тоглогчийн ээлжиийн оноог нэмэгдүүлнэ
-        if (diceNumber !== 1) {
+        if (diceNumber0 !== 1 && diceNumber1 !== 1) {
             // 1-ээс ялгаатай тоо буулаа. буусан тоог тоглогчид нэмж өгнө
-            roundScore = roundScore + diceNumber;
+            roundScore = roundScore + diceNumber0 + diceNumber1;
             document.getElementById(
                 "current-" + activePlayer
             ).textContent = roundScore;
@@ -96,7 +101,8 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
         document.getElementById("score-" + activePlayer).textContent =
             scores[activePlayer];
 
-        diceDom.style.display = "none";
+        diceDom0.style.display = "none";
+        diceDom1.style.display = "none";
 
         // уг тоглогч хожсон эсэхийг (оноо нь 100-с их эсэх) шалгах
         if (scores[activePlayer] >= 100) {
