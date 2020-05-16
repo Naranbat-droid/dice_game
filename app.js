@@ -83,7 +83,7 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
             nextPlayer();
         }
     } else {
-        alert("Тоглоом дууссан байна. START GAME товч дээр дарж шинээр эхлэнэ үү");
+        alert("Тоглоом дууссан байна. NEW GAME товч дээр дарж шинээр эхлэнэ үү");
     }
 });
 // HOLD  товчны эвент листенер
@@ -114,7 +114,7 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
             nextPlayer();
         }
     } else {
-        alert("Тоглоом дууссан байна. START GAME товч дээр дарж шинээр эхлэнэ үү");
+        alert("Тоглоом дууссан байна. NEW GAME товч дээр дарж шинээр эхлэнэ үү");
     }
 });
 
